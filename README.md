@@ -113,4 +113,36 @@ En el archivo *application.html.erb*, dentro de ```app/views/layouts/``` agregar
 
 ## Capítulo III (Agregando Bootstrap)
 
+Para instalar Bootstrap 5 en Rails 6 seguir los pasos del siguiente enlace:
+https://dev.to/songta17/rails-6-with-bootstrap-5-5c08
 
+En el archivo ```app/stylesheets/config/_bootstrap_variables.scss``` comenté todas las variables, ya qué me generaba un error. Esto lo veré luego, de momento quedará comentado.
+
+Siguiendo con el libro, agregar en *index.html.erb*:
+
+~~~
+<div class="jumbotron">
+    .
+    .
+    <%= link_to 'About Us', home_about_path, class: 'btn btn-default' %>
+    <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
+</div>
+~~~
+
+El archivo *_header.html.erb* queda como sigue:
+
+~~~
+<nav class="navbar navbar-expand-lg navbar-light bg-success p-2 text-dark bg-opacity-25">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#">Pinterested</a>
+    <div class="navbar-right d-inline">
+        <%= link_to 'Home', root_path, method: :get, class:"btn btn-dark my-auto"%>
+        <%= link_to 'About Us', home_about_path, method: :get, class:"btn btn-dark my-auto"%>
+    </div>
+  </div>
+</nav>
+~~~
+
+***Nota: Falta Jugar con estilos, lo dejaré para el final***
+
+## Capítulo IV (Agregando Usuarios con Devise)

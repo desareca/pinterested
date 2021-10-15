@@ -1,2 +1,9 @@
-<%= button_to 'Home', root_path, method: :get%>
-<%= button_to 'About Us', home_about_path, method: :get %>
+<nav class="navbar navbar-expand-lg navbar-light bg-success p-2 text-dark bg-opacity-25">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#">Pinterested</a>
+    <div class="navbar-right d-inline">
+        <%= link_to 'Home', root_path, method: :get, class:"btn btn-dark my-auto"%>
+        <%= link_to 'About Us', home_about_path, method: :get, class:"btn btn-dark my-auto"%>
+    </div>
+  </div>
+</nav>
