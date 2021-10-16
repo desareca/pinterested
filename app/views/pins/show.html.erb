@@ -5,5 +5,7 @@
   <%= @pin.description %>
 </p>
 
-<%= link_to 'Edit', edit_pin_path(@pin), class: 'text-success text-opacity-80' %> |
+<% if @pin.user == current_user && user_signed_in? %>
+  <%= link_to 'Edit', edit_pin_path(@pin), class: 'text-success text-opacity-80' %> |
+<% end %>
 <%= link_to 'Back', pins_path, class: 'text-success text-opacity-80' %>

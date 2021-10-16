@@ -262,4 +262,72 @@ Agregar en el navbar los enlaces a las vistas de pins de acuerdo a lo sgte:
 
 ## Capítulo VI (Autenticando Usuarios)
 
+Agregar referencia de *User* en *Pin*
+
+```rails generate migration add_user_id_to_pins user_id:integer:index```
+```rails db:migrate```
+
+Agregar relaciones entre modelos:
+*/app/models/pin.rb*
+```belongs_to :user```
+*/app/models/user.rb*
+```has_many :pins```
+
+Modificar lógicas del controlador de *Pin* en función del usuario.
+Agregar en */app/controllers/pins_controller.rb*
+~~~
+class PinsController < ApplicationController
+  before_action :set_pin, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  .
+  .
+  def new
+     @pin = current_user.pins.build
+  end
+  def create
+    @pin = current_user.pins.build(pin_params)
+  end
+  .
+  .
+  private
+  .
+  .
+  def correct_user
+    @pin = current_user.pins.find_by(id: params[:id])
+    redirect_to pins_path, notice: "Not authorized to edit this pin" if @pin.nil?
+  end
+~~~
+
+Modificar las vistas asociadas a *Pin* de acuerdo.
+*/app/views/pins/index.html.erb*
+~~~
+<% @pins.each do |pin| %>
+  <tr>
+    <td><%= pin.description %></td>
+    <td><%= link_to 'Show', pin %></td>
+    <% if pin.user == current_user %>
+      <td><%= link_to 'Edit', edit_pin_path(pin) %></td>
+      <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+~~~
+
+*/app/views/pins/show.html.erb*
+~~~
+<% if @pin.user == current_user %>
+  <%= link_to 'Edit', edit_pin_path(@pin) %>
+<% end %>
+<%= link_to 'Back', pins_path %>
+~~~
+
+## Capítulo VII (Subiendo Imágenes)
+
+
+
+
+
+
+
 

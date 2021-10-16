@@ -15,8 +15,10 @@
       <tr>
         <td><%= pin.description %></td>
         <td><%= button_to 'Show', pin, method: :get, class: 'btn bg-success bg-opacity-50 my-2' %></td>
-        <td><%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success bg-opacity-50 my-2' %></td>
-        <td><%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success bg-opacity-50 my-2' %></td>
+        <% if pin.user == current_user && user_signed_in? %>
+          <td><%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success bg-opacity-50 my-2' %></td>
+          <td><%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success bg-opacity-50 my-2' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +26,7 @@
 
 <br>
 
-<%= link_to 'New Pin', new_pin_path, class: 'text-success text-opacity-80' %>
+<% if user_signed_in? %>
+  <%= link_to 'New Pin', new_pin_path, class: 'text-success text-opacity-80' %>
+<% end %>
+
