@@ -45,8 +45,6 @@ Para poder visualizar hay que eliminar la linea 10 de *app/views/layouts/applica
 
 ```<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>```
 
-***Nota: eliminar esta linea puede traer problemas con bootstrap***
-
 Cambiar la ruta para que sea lo primero que aparezca al iniciar al aplicación:
 
 ```/config/routes.rb```
@@ -58,8 +56,7 @@ root 'home#index'
 end
 ~~~
 
-Para subir a github estoy utilizando github desktop, ver el sgte enlace:
-https://docs.github.com/es/desktop
+Para subir a github estoy utilizando [github desktop](https://docs.github.com/es/desktop).
 
 ## Capítulo II (Construyendo nuestra aplicación)
 
@@ -283,7 +280,7 @@ class PinsController < ApplicationController
   .
   .
   def new
-     @pin = current_user.pins.build
+    @pin = current_user.pins.build
   end
   def create
     @pin = current_user.pins.build(pin_params)
@@ -301,6 +298,7 @@ class PinsController < ApplicationController
 
 Modificar las vistas asociadas a *Pin* de acuerdo.
 */app/views/pins/index.html.erb*
+
 ~~~
 <% @pins.each do |pin| %>
   <tr>
@@ -315,6 +313,7 @@ Modificar las vistas asociadas a *Pin* de acuerdo.
 ~~~
 
 */app/views/pins/show.html.erb*
+
 ~~~
 <% if @pin.user == current_user %>
   <%= link_to 'Edit', edit_pin_path(@pin) %>
@@ -324,10 +323,71 @@ Modificar las vistas asociadas a *Pin* de acuerdo.
 
 ## Capítulo VII (Subiendo Imágenes)
 
+La gema ***Paperclip*** está obsoleta para ***Rails 6***, por lo que utilizaré ***Active Storage***. Para esto me basaré en el tutorial [Instagram con Rails 6](http://railsgirlscali.com/instagram-r6/) a partir del punto 19. Otro enlace interesante es [Usando Active Storage en Rails](https://pragmaticstudio.com/tutorials/using-active-storage-in-rails).
+
+Instalar Active Storage:
+~~~
+rails active_storage:install
+rails db:migrate
+~~~
+
+Instalar image_processing:
+*Gemfile*
+~~~
+# Use Active Storage variant
+gem 'image_processing', '~> 1.2'
+~~~
+
+*Consola*
+```bundle install```
 
 
+Instalar ***ImageMagick*** en Ubuntu:
+```sudo apt-get install imagemagick```
 
 
+Edita el formulario de Pin:
+*/app/views/pinss/_form.html.erb*
+~~~
+<div class="field">
+  <%= f.label :image %>
+  <%= f.file_field :image, class: 'form-control' %>
+</div>
+~~~
 
+Actualiza el controlador de Pins para parámetros “strong”:
+/app/controllers/pins_controller.rb
+~~~
+def pin_params
+  params.require(:pin).permit(:description, :image)
+end
+~~~
 
+Agregar imagen en las vistas:
+*/app/views/pins/index.html.erb*
+~~~
+<h1>Pins</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Description</th>
+.
+.
+<tbody>
+<% @pins.each do |pin| %>
+  <tr>
+    <td><%= image_tag pin.image.variant(resize_to_limit: [150, nil]) %></td>
+.
+.
+~~~
+
+*/app/views/pins/show.html.erb*
+~~~
+<div class="image">
+  <%= image_tag @pin.image, class:'img-responsive' %>
+</div>
+~~~
+
+## Capítulo VIII (Agregando estilos y paginación)
 
