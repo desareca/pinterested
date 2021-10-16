@@ -146,3 +146,95 @@ El archivo *_header.html.erb* queda como sigue:
 ***Nota: Falta Jugar con estilos, lo dejaré para el final***
 
 ## Capítulo IV (Agregando Usuarios con Devise)
+
+Agregar gemas para gestión de password y usuarios en *Gemfile*:
+
+~~~
+gem 'bcrypt'
+gem 'devise'
+~~~
+
+Instalar:
+
+```bundle install```
+
+Corremos el generador de *devise*:
+
+```rails generate devise:install```
+
+Verificamos en */config/environments/development.rb* si se encuentra los sgte (si no lo agregamos):
+
+```config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }```
+
+Agregamos en */app/views/layouts/application.html.erb* lo sgte:
+
+~~~
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert alert-info") %>
+  <% end %>
+  <%= yield %>
+</div>
+~~~
+
+Generamos las vistas con devise:
+
+```rails g devise:views```
+
+Ahora creamos el modelo *User* y migramos la base de datos:
+
+~~~
+rails generate devise user
+rake db:migrate
+~~~
+
+Crear Un usuario genérico para hacer pruebas y agregar estilos.
+
+Dentro de las modificaciones de estilo considerar:
+- Agregar a los campos de entrada ***class: 'form-control'***
+  ```<%= f.email_field :email, autofocus: true, class: 'form-control' %>```
+- Agregar a los botones ***class: 'btn bg-success bg-opacity-50 my-2'***
+  ```<%= f.submit "Sign up", class: 'btn btn-primary' %>```
+- Agregar header y footer de cada formulario
+  ~~~
+  <div class="panel panel-default">
+  <div class="panel-heading"><h2>Sign up</h2></div>
+  <div class="panel-body">
+  .
+  .
+  </div>
+    <div class="panel-footer"><%= render "devise/shared/links" %></div>
+  </div>
+  ~~~
+
+Esto para las siguientes vistas:
+- /app/views/devise/registrations/new.html.erb
+- /app/views/devise/registrations/edit.html.erb
+- /app/views/devise/sessions/new.html.erb
+- /app/views/devise/passwords/new.html.erb
+
+En */app/views/home/_header.html.erb* agregar los enlaces a las vistas de los nuevos formularios de devise:
+~~~
+<div class="nav navbar-nav navbar-right">
+    <%= button_to 'Home', root_path, method: :get, class:"btn btn-dark my-auto mx-1"%>
+    <%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark my-auto mx-1"%>
+
+    <% if user_signed_in? %>
+      <%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark my-auto mx-1" %>
+    <% else %>
+      <%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
+      <%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
+    <% end %>
+</div>
+~~~
+
+Realicé algunas modificaciones de estilo más y luego realizaré más, pero las anteriores son las que están asociadas al libro.
+
+
+## Capítulo V (Construyendo un Scaffold)
+
+
+
+
+
