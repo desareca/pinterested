@@ -1,6 +1,6 @@
 <%= paginator.render do %>
   <nav>
-    <ul class="pagination bg-opacity-50">
+    <ul class="pagination bg-opacity-50 justify-content-center">
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| %>
