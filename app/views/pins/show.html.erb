@@ -1,15 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<div class="image">
-  <%= image_tag @pin.image, class:'img-responsive' %>
+<div id='showcard' class="card w-auto mx-auto">
+  <div class="card-body mx-auto my-1">
+    <h3 class='pb-1'><%= '@' + @pin.user.name %></h3>
+    <%= image_tag(@pin.image, class: 'row img-fluid')%>
+    <p class="card-text my-2"><%= @pin.description %></p>
+    <% if @pin.user == current_user && user_signed_in? %>
+      <%= button_to 'Edit', edit_pin_path(@pin), method: :get, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>
+    <% end %>
+    <%= button_to 'Back', pins_path, method: :get, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>
+  </div>
 </div>
-
-<p>
-  <strong>Description:</strong>
-  <%= @pin.description %>
-</p>
-
-<% if @pin.user == current_user && user_signed_in? %>
-  <%= link_to 'Edit', edit_pin_path(@pin), class: 'text-success text-opacity-80' %> |
-<% end %>
-<%= link_to 'Back', pins_path, class: 'text-success text-opacity-80' %>

@@ -2,18 +2,19 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Pinterested</a>
     <div class="nav navbar-nav navbar-right">
-        <%= button_to 'Home', root_path, method: :get, class:"btn btn-dark my-auto mx-1"%>
-        <%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark my-auto mx-1"%>
-        <%= button_to 'List Pins', pins_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
-
+      <ul class="nav justify-content-end">
+        <li class="nav-item"><%= button_to 'Home', root_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'List Pins', pins_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
         <% if user_signed_in? %>
-          <%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark my-auto mx-1" %>
-          <%= button_to 'Add Pin', new_pin_path, method: :get, class:"btn btn-dark my-auto mx-1"  %>
+          <li class="nav-item"><%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Add Pin', new_pin_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
         <% else %>
-          <%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
-          <%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark my-auto mx-1" %>
+          <li class="nav-item"><%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
         <% end %>
+      </ul>
     </div>
   </div>
 </nav>

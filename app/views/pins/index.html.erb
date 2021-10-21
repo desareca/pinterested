@@ -1,35 +1,17 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Pins</h1>
+<div id="pins" class="transitions-enabled mx-auto">
+  <%= paginate @pins%>
+  <% @pins.each do |pin| %>
+    <div class="box">
+      <%= link_to image_tag(pin.image.variant(resize_and_pad: [300, 300, background: '#dcffe5'])), pin %><!--<hr>-->
+      <p class='my-2'><%= pin.description %></p>
+      <h6><%= '@' + pin.user.name if pin.user %></h6>
+      <% if pin.user == current_user && user_signed_in? %>
+        <%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>
+        <%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pins.each do |pin| %>
-      <tr>
-        <td><%= image_tag pin.image.variant(resize_to_limit: [150, nil]) %></td>
-
-        <td><%= pin.description %></td>
-        <td><%= button_to 'Show', pin, method: :get, class: 'btn bg-success bg-opacity-50 my-2' %></td>
-        <% if pin.user == current_user && user_signed_in? %>
-          <td><%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success bg-opacity-50 my-2' %></td>
-          <td><%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success bg-opacity-50 my-2' %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Pin', new_pin_path, class: 'text-success text-opacity-80' %>
-<% end %>
 

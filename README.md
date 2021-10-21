@@ -318,76 +318,203 @@ Modificar las vistas asociadas a *Pin* de acuerdo.
 <% if @pin.user == current_user %>
   <%= link_to 'Edit', edit_pin_path(@pin) %>
 <% end %>
-<%= link_to 'Back', pins_path %>
+<%  = link_to 'Back', pins_path %>
 ~~~
 
 ## Capítulo VII (Subiendo Imágenes)
 
 La gema ***Paperclip*** está obsoleta para ***Rails 6***, por lo que utilizaré ***Active Storage***. Para esto me basaré en el tutorial [Instagram con Rails 6](http://railsgirlscali.com/instagram-r6/) a partir del punto 19. Otro enlace interesante es [Usando Active Storage en Rails](https://pragmaticstudio.com/tutorials/using-active-storage-in-rails).
 
-Instalar Active Storage:
-~~~
-rails active_storage:install
-rails db:migrate
-~~~
+El procesor es el siguiente:
 
-Instalar image_processing:
+- Instalar Active Storage:
+  ~~~
+  rails active_storage:install
+  rails db:migrate
+  ~~~
+
+- Instalar image_processing:
+  * *Gemfile*
+    ~~~
+    # Use Active Storage variant
+    gem 'image_processing', '~> 1.2'
+    ~~~
+
+  * *Consola*
+  ```bundle install```
+
+- Instalar ***ImageMagick*** en Ubuntu: 
+  ```sudo apt-get install imagemagick```
+
+- Edita el formulario de Pin:
+  */app/views/pinss/_form.html.erb*
+  ~~~
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+  ~~~
+
+- Actualiza el controlador de Pins para parámetros “strong”:
+  */app/controllers/pins_controller.rb*
+  ~~~
+  def pin_params
+    params.require(:pin).permit(:description, :image)
+  end
+  ~~~
+
+- Agregar imagen en las vistas:
+  */app/views/pins/index.html.erb*
+  ~~~
+  <h1>Pins</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Description</th>
+  .
+  .
+  <tbody>
+  <% @pins.each do |pin| %>
+  .
+    <%= link_to image_tag(pin.image.variant(resize_and_pad: [300, 300, background: '#dcffe5'])), pin %>
+  .
+  .
+  ~~~
+
+- Agregar imagen en */app/views/pins/show.html.erb*:
+  ~~~
+  <div class="image">
+    <%= image_tag @pin.image, class:'img-responsive' %>
+  </div>
+  ~~~
+
+## Capítulo VIII (Agregando estilos y paginación)
+
+Para instalar [Masonry](https://github.com/kristianmandrup/masonry-rails) en rails seguí las instrucciones del enlace.
+
+Instalar gema masonry-rails
 *Gemfile*
-~~~
-# Use Active Storage variant
-gem 'image_processing', '~> 1.2'
-~~~
-
-*Consola*
+```gem 'masonry-rails'```
+*Terminal*
 ```bundle install```
 
 
-Instalar ***ImageMagick*** en Ubuntu:
-```sudo apt-get install imagemagick```
+Agregar en application.css file:
 
+*= require 'masonry/basic'
+*= require 'masonry/centered'
+*= require 'masonry/fluid'
+*= require 'masonry/gutters'
+*= require 'masonry/infinitescroll'
+*= require 'masonry/right-to-left'
+*= require 'masonry/transitions'
 
-Edita el formulario de Pin:
-*/app/views/pinss/_form.html.erb*
+Luego modifiqué lo siguiente:
+*/app/assets/stylesheets/pins.scss*
+*/app/views/pins/index.html.erb*
+*/app/views/pins/show.html.erb*
+
+Las modificaciones consideran en base a lo indicado en el libro y otras... No las indico, ya que depende de los estilos que cada uno quiera dar.
+
+Agregar lo sgte para hacerlo responsivo:
+*/app/views/layouts/application.html.erb*
+
+```<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">```
+
+### Paginación:
+- Agregar paginación:
+  Para agregar paginación agregar en *Gemfile*
+  ```gem 'kaminari'```
+
+  Ejecutar en consola:
+  ```rails g kaminari:config```
+
+  Modificar el */app/controllers/pins_controller.rb*:
+  ```@pins = Pin.all.order("created_at DESC").page(params[:page])```
+
+  Agregar en */app/views/pins/index.html.erb*:
+  ```<%= paginate @pins%>```
+
+  ***Nota: Tuve problemas para dejar la paginación centrado abajo (pendiente solucionar esto).***
+
+- Cambiar estilo paginación:
+  Crear vistas por default de kaminari en consola:
+  ```rails g kaminari:views default```
+
+  Se creará una nueva vista kamimari, reemplazar los archivos por la carpeta de ***bootstrap4*** del siguiente enlace:
+  *https://github.com/amatsuda/kaminari_themes*
+
+***Nota: Se puede hacer con la gema 'bootstrap5-kaminari-views', pero quita libertad para cambiar los estilos.***
+
+### Agregar Name a User
+
+***Nota: Eliminar todos los pins***
+
+Crear columna en la tabla *User*
 ~~~
-<div class="field">
-  <%= f.label :image %>
-  <%= f.file_field :image, class: 'form-control' %>
-</div>
+rails generate migration AddNameToUsers name:string
+rails db:migrate
 ~~~
 
-Actualiza el controlador de Pins para parámetros “strong”:
-/app/controllers/pins_controller.rb
-~~~
-def pin_params
-  params.require(:pin).permit(:description, :image)
-end
+Agregar campo a las vistas:
+
+*/app/views/devise/registrations/new.html.erb*
+~~~      
+  .
+  .
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", :autofocus => true %>
+  </div>
+  .
+  .
 ~~~
 
-Agregar imagen en las vistas:
+*/app/views/devise/registrations/edit.html.erb*
+~~~      
+  .
+  .
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", :autofocus => true %>
+  </div>
+  .
+  .
+~~~
+
+Agregar la columna *name* al controlador de *Pin*
+*/app/controllers/pins_controller.rb*
+~~~
+  .
+  .
+  def pin_params
+    params.require(:pin).permit(:description, :image, :name)
+  end
+  .
+  .
+~~~
+
+Agregar nombre en las vistas:
 */app/views/pins/index.html.erb*
 ~~~
-<h1>Pins</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Description</th>
 .
 .
-<tbody>
-<% @pins.each do |pin| %>
-  <tr>
-    <td><%= image_tag pin.image.variant(resize_to_limit: [150, nil]) %></td>
-.
-.
+<%= link_to image_tag(pin.image.url(:medium)), pin %><br/>
+  <div class="panel-body">
+  <%= pin.description %><br/>
+  <h6><%= '@' + pin.user.name if pin.user %></h6>
+</div>
 ~~~
 
 */app/views/pins/show.html.erb*
 ~~~
-<div class="image">
-  <%= image_tag @pin.image, class:'img-responsive' %>
-</div>
+  .
+  .
+  <%= @pin.description %><br/>
+  <h3 class='pb-1'><%= '@' + @pin.user.name %></h3>
+  .
+  .
 ~~~
 
-## Capítulo VIII (Agregando estilos y paginación)
 

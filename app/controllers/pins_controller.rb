@@ -5,7 +5,8 @@ class PinsController < ApplicationController
 
   # GET /pins or /pins.json
   def index
-    @pins = Pin.all
+    @pins = Pin.all.order("created_at DESC").page(params[:page])
+
   end
 
   # GET /pins/1 or /pins/1.json
@@ -68,7 +69,7 @@ class PinsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pin_params
-      params.require(:pin).permit(:description, :image)
+      params.require(:pin).permit(:description, :image, :name)
     end
 
     def correct_user

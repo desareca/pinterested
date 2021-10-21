@@ -1,3 +1,34 @@
 // Place all the styles related to the pins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+#pins {
+    margin: 0 auto;
+}
+
+.box {
+    margin: 5px;
+    width: 214px;
+    background-color: $bg-color;
+}
+
+.box p {
+    margin: 0px;
+}
+
+.box img {
+    width: 100%;
+}
+
+#showcard {
+    background-color: $bg-color-2;
+    border-color: $bg-color-2;
+    max-width: max-content;
+}
+
+#showcard image {
+    max-width: max-content;
+}
