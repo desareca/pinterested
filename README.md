@@ -1,10 +1,13 @@
 # Pinterested (Clon de Pinterest)
 
-Cuando comencé este proyecto siguiendo los pasos del libro me encontré con varios problemas, sobre todo de compatibilidad de las versiones de **RoR** que utilizo. El principal fue en el ***Capítulo VI***, donde la gema ***paperclip*** estaba obsoleta y al intentar utilizar otra rompí algo en el proyecto.
+Cuando comencé este proyecto siguiendo los pasos del libro me encontré con varios problemas, sobre todo de compatibilidad de las versiones de **RoR** que utilizo. El principal fue en el ***Capítulo VI***, donde la gema ***paperclip*** estaba obsoleta (para la versión de RoR con que estaba trabajando) y al intentar utilizar otra rompí algo en el proyecto.
 
 Cuando decidí rehacer el proyecto me di cuenta de que no había guardado los pasos adicionales que tuve que hacer, por lo que ahora lo dejaré documentado acá.
 
 El proyecto descrito acá sólo considera el desarrollo local, por lo que obviaré configuraciones en **AWS** y/o **Heroku**.
+
+
+***Actualización:*** Subí el proyecto a **AWS**, los pasos para subir este proyecto están en el archivo **Instancia AWS.md** (y varios archivos adicionales), para ver el resultado ir a [Pinterested](http://3.141.103.226/). Aún tengo pendiente mejorar las vistas.
 
 ## Capítulo I (Entorno de desarrollo)
 

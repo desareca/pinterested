@@ -4,7 +4,7 @@
     <div class="box">
       <%= link_to image_tag(pin.image.variant(resize_and_pad: [300, 300, background: '#dcffe5'])), pin %><!--<hr>-->
       <p class='my-2'><%= pin.description %></p>
-      <h6><%= ('@' + pin.user.name) if pin.user %></h6>
+      <h6><%= pin.user.name if pin.user %></h6>
       <% if pin.user == current_user && user_signed_in? %>
         <%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>
         <%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success bg-opacity-50 btn-sm', form: {style: 'display:inline-block;'} %>

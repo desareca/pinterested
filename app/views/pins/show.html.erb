@@ -1,6 +1,6 @@
 <div id='showcard' class="card w-auto mx-auto">
   <div class="card-body mx-auto my-1">
-    <h3 class='pb-1'><%= '@' + @pin.user.name %></h3>
+    <h3 class='pb-1'><%= @pin.user.name %></h3>
     <%= image_tag(@pin.image, class: 'row img-fluid')%>
     <p class="card-text my-2"><%= @pin.description %></p>
     <% if @pin.user == current_user && user_signed_in? %>
