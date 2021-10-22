@@ -38,3 +38,21 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# No considerar las fotos en carpta public
+
+/public/packs/Fractal_1.jpg
+/public/packs/Fractal_2.jpg
+/public/packs/Fractal_3.jpg
+/public/packs/Fractal_4.jpg
+/public/packs/Fractal_5.jpg
+/public/packs/Fractal_6.jpg
+/public/packs/Fractal_7.jpg
+/public/packs/Fractal_8.jpg
+/public/packs/Fractal_9.jpg
+/public/packs/Fractal_10.jpg
+/public/packs/Fractal_11.jpg
+/public/packs/Fractal_12.jpg
+/public/packs/gato_1.jpg
+/public/packs/gato_2.jpg
+/public/packs/gato_3.jpg

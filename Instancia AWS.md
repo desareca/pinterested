@@ -1,4 +1,3 @@
-
 # Configuración y Conexión de Servidor en AWS
 
 En el panel EC2 vamos a dar clic en el botón azul grande que dice "Lanzar Instancia"
@@ -32,5 +31,26 @@ Instalar desde terminal de acuerdo a los siguientes archivos:
 
 ***Nota 1: Hay algunos problemas de instalación de bootstrap***
 ***Nota 2: Por temas del tipo de instancia algunas imágenes no se cargan, evitar cargar imágenes muy pesadas***
+
+
+# Configurar VSCode con AWS
+
+Para configurar un canal ssh entre *VSCode* y *AWS* seguir los pasos del siguiente video:
+
+[![Usar instancia EC2 de AWS con Visual studio code en Windows 10 - Remote SSH.](https://img.youtube.com/vi/cMGCvdayJYM/0.jpg)](https://www.youtube.com/watch?v=cMGCvdayJYM)
+
+
+Utilizo *Windows 10* y me funcionó. Al principio no conectaba, por lo que tuve que copiar el keyname.pem (necesario para la conexión ssh) a la carpeta C:/users/<User> (considera la carpeta de acuerdoa tu configuración).
+
+
+
+
+
+
+
+
+
+
+
 
 
