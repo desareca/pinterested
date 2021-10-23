@@ -1,18 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-success p-2 text-dark bg-opacity-25 mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Pinterested</a>
+<nav class="navbar navbar-expand-lg navbar-light p-2 text-dark mb-4">
+  <div class="cont-nav container-fluid">
+    <p class="navbar-brand justify-content-left my-auto">Pinterested</p>
     <div class="nav navbar-nav navbar-right">
       <ul class="nav justify-content-end">
-        <li class="nav-item"><%= button_to 'Home', home_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
-        <li class="nav-item"><%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
-        <li class="nav-item"><%= button_to 'List Pins', pins_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'Home', home_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'List Pins', pins_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% if user_signed_in? %>
-          <li class="nav-item"><%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to 'Add Pin', new_pin_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Add Pin', new_pin_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% else %>
-          <li class="nav-item"><%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% end %>
       </ul>
     </div>

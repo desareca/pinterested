@@ -32,6 +32,10 @@ body {
     background-color: $bg-color;
 }
 
+.btn {
+    border-radius: 50rem !important;
+}
+
 .pagination li a {
     background-color: $color-pag-2;
     color: $color-pag-3 !important;

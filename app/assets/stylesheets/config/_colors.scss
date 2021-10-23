@@ -3,12 +3,11 @@ $blue: #167FFB;
 $yellow: #FFC65A;
 $orange: #E67E22;
 $green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+$gray: #000E00;
+$light-gray: #F4FFF4;
 //colores nuevos
-$bg-color: #dcffe5; //se debe ajustar a mano en las imagenes transformadas en .variant()
-$bg-color-2: #dcffe5;
-$color-pag-1: rgba($green, 0.5);
-$color-pag-2: white;
+$bg-color: $light-gray; //se debe ajustar a mano en las imagenes transformadas en .variant()
+$color-pag-1: rgba($green, 0.8);
+$color-pag-2: $light-gray;
 $color-pag-3: $gray;
-$color-pag-4: $bg-color;
+$color-pag-4: rgba($green, 0.8);
