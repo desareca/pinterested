@@ -536,4 +536,19 @@ Agregar nombre en las vistas:
   .
 ~~~
 
+## Algunas mejoras adicionales:
 
+### Validación en la carga de imágenes.
+
+Agregar validación de imágenes en */app/models/pin.rb*
+~~~
+    validates :image, presence: true
+    validate :correct_image
+
+    private
+    def correct_image
+        if !image.content_type.in?(%w(image/png image/jpeg image/jpg))
+            errors.add(:image, 'must be a JPG/JPEG/PNG.')
+        end
+    end
+~~~
