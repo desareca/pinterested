@@ -9,20 +9,21 @@
     margin: 0 auto;
 }
 
-.box {
-    margin: 5px;
-    width: 214px;
+.indexcard {
     background-color: $bg-color;
 }
 
-.box p {
+.indexcard p {
     margin: 0px;
 }
 
-.box img {
-    width: 100%;
+.indexcard .img {
+    border-radius: 50rem !important;
 }
 
+//#indexcard img {
+//width: 300px;
+//}
 #showcard {
     background-color: $bg-color;
     border-color: $bg-color;
@@ -31,4 +32,5 @@
 
 #showcard image {
     max-width: max-content;
+    border-radius: 2rem;
 }

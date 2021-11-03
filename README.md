@@ -552,3 +552,42 @@ Agregar validación de imágenes en */app/models/pin.rb*
         end
     end
 ~~~
+
+### Modificar estilos de vistas de imágenes utilizando *card-grid* de bootstrap
+*/app/views/pins/index.html.erb*
+~~~
+<div id="pins" class="row w-100 row-cols-1 row-cols-md-2 g-4">
+  <div class="col mx-auto p-auto">
+    <%= paginate @pins, class:'my-1'%>
+    <% @pins.each do |pin| %>
+      <div class="indexcard card my-1 mx-auto">
+        <%= link_to image_tag(pin.image.variant(resize_to_fill: [300, 300]), class:"card-img-top"), pin%><!--<hr>-->
+        <div class="card-body">
+          <h6 class='card-title'><%= pin.user.name if pin.user %></h6>
+          <p class='card-text my-2'><%= pin.description %></p>
+          <% if pin.user == current_user && user_signed_in? %>
+            <%= button_to 'Edit', edit_pin_path(pin), method: :get, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
+            <%= button_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @pins, class:'my-2'%>
+  </div>
+</div>
+~~~
+
+### Cambiar color de navbar (*app/asstes/stylesheets/home.scss*)
+~~~
+.navbar {
+    background-color: $bg-color;
+}
+~~~
+
+
+## Algunas propuestas de mejora:
+
+- Generar un avatar para los usuarios.
+- Investigar sobre como agregar *modal*, *dropdown* y/o *tooltip* con bootstrap 5 en rails 6.
+- Agregar más información a cada usuario.
+- Generar página de perfil de cada usuario.
