@@ -4,8 +4,8 @@
     <%= image_tag(@pin.image, class: 'img-fluid image-show')%>
     <p class="card-text my-2"><%= @pin.description %></p>
     <% if @pin.user == current_user && user_signed_in? %>
-      <%= button_to 'Edit', edit_pin_path(@pin), method: :get, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
+      <%= button_to 'Editar', edit_pin_path(@pin), method: :get, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
     <% end %>
-    <%= button_to 'Back', pins_path, method: :get, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
+    <%= button_to 'Volver', pins_path, method: :get, class: 'btn bg-success rounded-pill bg-opacity-70 btn-sm', form: {style: 'display:inline-block;'} %>
   </div>
 </div>

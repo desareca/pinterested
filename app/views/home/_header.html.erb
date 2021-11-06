@@ -6,16 +6,16 @@
       data-bs-toggle="tooltip" data-bs-placement="top" title="Desarecarest">
     <div class="col nav navbar-nav navbar-right justify-content-end">
       <ul class="nav justify-content-end">
-        <li class="nav-item"><%= button_to 'Home', home_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
-        <li class="nav-item"><%= button_to 'About Us', home_about_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
-        <li class="nav-item"><%= button_to 'List Pins', pins_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'Inicio', home_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'Sobre Mí', home_about_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+        <li class="nav-item"><%= button_to 'Galeria', pins_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% if user_signed_in? %>
-          <li class="nav-item"><%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to 'Add Pin', new_pin_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Agregar Foto', new_pin_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Editar Pérfil', edit_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to 'Salir', destroy_user_session_path, method: :delete, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% else %>
-          <li class="nav-item"><%= button_to "Login", new_user_session_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
-          <li class="nav-item"><%= button_to "Join", new_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to "Iniciar Sesión", new_user_session_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
+          <li class="nav-item"><%= button_to "Únete", new_user_registration_path, method: :get, class:"btn btn-dark rounded-pill btn-sm m-1"%></li>
         <% end %>
       </ul>
     </div>

@@ -1,8 +1,11 @@
 <%= form_with(model: pin) do |form| %>
   <% if pin.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(pin.errors.count, "error") %> prohibited this pin from being saved:</h2>
-
+      <% if pin.errors.count > 1 %>
+        <h2><%= pluralize(pin.errors.count, "errores") %> provocaron que esta foto se guarde:</h2>
+      <% else %>
+        <h2><%= pluralize(pin.errors.count, "error") %> provocó que esta foto se guarde:</h2>
+      <% end %>
       <ul>
         <% pin.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,16 +15,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label "Descripción" %>
     <%= form.text_field :description, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :image %>
+    <%= form.label "Imagen" %>
     <%= form.file_field :image, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn bg-success bg-opacity-70 my-2'%>
+    <%= form.submit "Subir Foto", class: 'btn bg-success bg-opacity-70 my-2'%>
   </div>
 <% end %>

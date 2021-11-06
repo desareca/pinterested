@@ -8,7 +8,7 @@ class Pin < ApplicationRecord
     private
     def correct_image
         if !image.content_type.in?(%w(image/png image/jpeg image/jpg))
-            errors.add(:image, 'must be a JPG/JPEG/PNG.')
+            errors.add('Imagen:', 'El formato tiene que ser JPG/JPEG/PNG.')
         end
     end
 end

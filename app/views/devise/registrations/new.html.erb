@@ -1,11 +1,11 @@
 <div class="panel panel-default">
-  <div class="panel-heading"><h2>Sign up</h2></div>
+  <div class="panel-heading"><h2>Registrarse</h2></div>
   <div class="panel-body">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
-        <%= f.label :name %>
+        <%= f.label "Nombre" %>
         <%= f.text_field :name, class: "form-control", :autofocus => true %>
       </div>
 
@@ -15,20 +15,20 @@
       </div>
 
       <div class="field">
-        <%= f.label :password %>
+        <%= f.label "Contraseña" %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(Mínimo <%= @minimum_password_length %> caracteres)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.password_field "Contraseña", autocomplete: "contraseña nueva", class: 'form-control' %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        <%= f.label "Confirmar contraseña" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "contraseña nueva", class: 'form-control' %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: 'btn bg-success bg-opacity-70 my-2' %>
+        <%= f.submit "Registrarse", class: 'btn bg-success bg-opacity-70 my-2' %>
       </div>
     <% end %>
   </div>

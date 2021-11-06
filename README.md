@@ -584,7 +584,7 @@ Agregar validación de imágenes en */app/models/pin.rb*
 }
 ~~~
 
-### Agragar logo y favicon
+### Agrega logo y favicon
 *app/views/home/_header.html.erb*
 ~~~
 <nav class="navbar navbar-expand-lg navbar-light p-2 text-dark mb-0 border-bottom">
@@ -605,6 +605,14 @@ Agregar validación de imágenes en */app/models/pin.rb*
 <%= favicon_link_tag asset_path('logo.png') %>
 ~~~
 
+### Cambios menores
+
+- Agrega descripción a ***Inicio***
+- Agrega descripción a ***Sobre mí***
+- Traduce vistas a español
+- Quita descripción de las fotos en ***Galería***
+- Modifica paginación (estilos)
+- Modifica estilos de errores
 
 
 ## Algunas propuestas de mejora:

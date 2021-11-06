@@ -14,7 +14,15 @@
 }
 
 .navbar-brand {
-    max-width: 100px;
+    max-width: 90px;
     height: auto;
-    min-width: 70px;
+    min-width: 60px;
+}
+
+#a-github p {
+    text-align: justify;
+}
+
+.a-github {
+    text-decoration: none;
 }
