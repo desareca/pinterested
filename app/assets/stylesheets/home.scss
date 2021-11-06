@@ -12,3 +12,9 @@
     background-color: 'transparent' !important;
     color: $gray !important;
 }
+
+.navbar-brand {
+    max-width: 100px;
+    height: auto;
+    min-width: 70px;
+}

@@ -584,10 +584,31 @@ Agregar validación de imágenes en */app/models/pin.rb*
 }
 ~~~
 
+### Agragar logo y favicon
+*app/views/home/_header.html.erb*
+~~~
+<nav class="navbar navbar-expand-lg navbar-light p-2 text-dark mb-0 border-bottom">
+  <div class="row cont-nav container-fluid">
+    <img 
+      src=<%=asset_path('logo.png')%> alt="logo" 
+      class='col-1 navbar-brand justify-content-left img-flex' 
+      data-bs-toggle="tooltip" data-bs-placement="top" title="Desarecarest">
+    <div class="col nav navbar-nav navbar-right justify-content-end">
+    .
+    .
+    .
+</nav>
+~~~
+
+*app/views/layouts/applications.html.erb*
+~~~
+<%= favicon_link_tag asset_path('logo.png') %>
+~~~
+
+
 
 ## Algunas propuestas de mejora:
 
 - Generar un avatar para los usuarios.
-- Investigar sobre como agregar *modal*, *dropdown* y/o *tooltip* con bootstrap 5 en rails 6.
 - Agregar más información a cada usuario.
 - Generar página de perfil de cada usuario.
